@@ -1,0 +1,74 @@
+version: "3"
+services:
+
+  # nginx:
+  #   image: nginx:alpine
+  #   links:
+  #     - flaskapp:uwsgi
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - asset_conf/asset_conf/components/nginx/nginx_${ASSET_CONFIG}.conf:/etc/nginx/nginx.conf
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=ziper520
+    # secret 改造
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
+
+  golang:
+    image: golang:latest
+    volumes:
+      - E:\code\golang:/go/src
+    command: bash
+    tty: true
+
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    volumes:
+      - E:\code\python3\MachineLearning:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - "8888:8888"
+    command: >
+      start-notebook.sh
+      --NotebookApp.token=''
+
+
+# volumes:
+#   redis-data:
+#     driver: local
+#   redis-data2:
+#     driver: local
+
+networks:
+  base-service:
+    driver: bridge
+  redis-cluster:
+    driver: bridge
+
+
+# export COMPOSE_CONVERT_WINDOWS_PATHS=1
+# docker-compose -p asset -f docker-compose.yml up -d rtservice-web
+# docker-compose -f docker-compose.yml down
+# docker-compose exec asset-web sh
+# docker-compose build docker_web_1 --force-rm
+
+# 重新构建容器
+# docker-compose -p asset -f docker-compose.yml up -d --no-deps --build rtservice-web
