@@ -31,24 +31,36 @@ services:
       - ./redis/redis.conf:/etc/redis/redis.conf
     command: redis-server /etc/redis/redis.conf
 
-  golang:
-    image: golang:latest
-    volumes:
-      - E:\code\golang:/go/src
-    command: bash
-    tty: true
+  # golang:
+  #   image: golang:latest
+  #   volumes:
+  #     - E:\code\golang:/go/src
+  #   command: bash
+  #   tty: true
 
-  jupyter:
-    image: jupyter/datascience-notebook:latest
+  # jupyter:
+  #   image: jupyter/datascience-notebook:latest
+  #   volumes:
+  #     - E:\code\python3\MachineLearning:/home/jovyan/work
+  #   environment:
+  #     - JUPYTER_ENABLE_LAB=yes
+  #   ports:
+  #     - "8888:8888"
+  #   command: >
+  #     start-notebook.sh
+  #     --NotebookApp.token=''
+
+  mongo:
+    # docker-compose exec  mongo mongo admin
+    image: mongo:latest
     volumes:
-      - E:\code\python3\MachineLearning:/home/jovyan/work
+      - ./mongo/db:/data/db
     environment:
-      - JUPYTER_ENABLE_LAB=yes
+      - ./mongo/configdb:/data/configdb
     ports:
-      - "8888:8888"
-    command: >
-      start-notebook.sh
-      --NotebookApp.token=''
+      - "27017:27017"
+      - "28017:28017"
+
 
 
 # volumes:
