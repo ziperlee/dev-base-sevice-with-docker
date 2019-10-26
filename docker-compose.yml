@@ -38,17 +38,18 @@ services:
   #   command: bash
   #   tty: true
 
-  # jupyter:
-  #   image: jupyter/datascience-notebook:latest
-  #   volumes:
-  #     - E:\code\python3\MachineLearning:/home/jovyan/work
-  #   environment:
-  #     - JUPYTER_ENABLE_LAB=yes
-  #   ports:
-  #     - "8888:8888"
-  #   command: >
-  #     start-notebook.sh
-  #     --NotebookApp.token=''
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    volumes:
+      - E:\code\python3\MachineLearning:/home/jovyan/work
+      - E:\code\python3\MachineLearning\scikit_learn_data:/home/jovyan/scikit_learn_data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - "8888:8888"
+    command: >
+      start-notebook.sh
+      --NotebookApp.token=''
 
   mongo:
     # docker-compose exec  mongo mongo admin
