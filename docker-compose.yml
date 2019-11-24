@@ -21,6 +21,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
 
   redis:
     image: redis:alpine
