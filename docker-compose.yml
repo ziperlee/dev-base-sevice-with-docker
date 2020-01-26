@@ -42,8 +42,10 @@ services:
   jupyter:
     image: jupyter/datascience-notebook:latest
     volumes:
-      - E:\code\python3\MachineLearning:/home/jovyan/work
-      - E:\code\python3\MachineLearning\scikit_learn_data:/home/jovyan/scikit_learn_data
+      # - E:\code\python3\MachineLearning:/home/jovyan/work
+      # - E:\code\python3\MachineLearning\scikit_learn_data:/home/jovyan/scikit_learn_data
+      - /Users/zipee/code/MachineLearning:/home/jovyan/work
+      - /Users/zipee/code/MachineLearning/scikit_learn_data:/home/jovyan/scikit_learn_data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     ports:
@@ -79,10 +81,10 @@ networks:
 
 
 # export COMPOSE_CONVERT_WINDOWS_PATHS=1
-# docker-compose -p asset -f docker-compose.yml up -d rtservice-web
+# docker-compose -f docker-compose.yml up -d jupyter
 # docker-compose -f docker-compose.yml down
 # docker-compose exec asset-web sh
 # docker-compose build docker_web_1 --force-rm
 
 # 重新构建容器
-# docker-compose -p asset -f docker-compose.yml up -d --no-deps --build rtservice-web
+# docker-compose -p asset -f docker-compose.yml up -d --no-deps --build jupyter
