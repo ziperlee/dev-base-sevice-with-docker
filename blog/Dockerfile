@@ -17,6 +17,10 @@ CMD ["hexo", "server"]
 # docker build -t blog .
 #
 # docker run -it -v //e/code/ziperlee.github.io:/opt/hexo -p 4000:4000 --name blog blog:latest bash
-#
+# docker run -it -d -v /Users/zipee/code/ziperlee.github.io:/opt/hexo -p 4000:4000 --name blog blog:latest
 # winpty docker exec -it blog bash
 
+# hexo new title
+# hexo g
+# hexo s
+# hexo d
