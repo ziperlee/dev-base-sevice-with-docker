@@ -10,6 +10,9 @@ yum install -y epel-release nodejs git && \
 npm config set registry https://registry.npm.taobao.org && \
 npm install hexo-cli -g
 
+RUN git config --global user.name "ziperlee" && \
+    git config --global user.email 839728919@qq.com
+
 EXPOSE 4000
 CMD ["hexo", "server"]
 
